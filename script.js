@@ -5,14 +5,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const taskInput = document.getElementById('task-input');
   const taskList = document.getElementById('task-list');
 
-  // Load tasks from localStorage on page load
+  // Load tasks from localStorage
   loadTasks();
 
   // Function to add a new task
   function addTask(taskText, save = true) {
+    // Create a new list item
     const li = document.createElement('li');
     li.textContent = taskText;
 
+    // Create a remove button
     const removeBtn = document.createElement('button');
     removeBtn.textContent = 'Remove';
     removeBtn.className = 'remove-btn';
@@ -23,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
       removeFromStorage(taskText);
     };
 
+    // Append button to list item, then list item to task list
     li.appendChild(removeBtn);
     taskList.appendChild(li);
 
@@ -32,6 +35,9 @@ document.addEventListener('DOMContentLoaded', () => {
       storedTasks.push(taskText);
       localStorage.setItem('tasks', JSON.stringify(storedTasks));
     }
+
+    // Clear input field
+    taskInput.value = '';
   }
 
   // Function to load tasks from localStorage
@@ -54,7 +60,6 @@ document.addEventListener('DOMContentLoaded', () => {
       alert('Please enter a task.');
     } else {
       addTask(taskText);
-      taskInput.value = '';
     }
   });
 
@@ -66,9 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Please enter a task.');
       } else {
         addTask(taskText);
-        taskInput.value = '';
       }
     }
   });
 });
+
 
